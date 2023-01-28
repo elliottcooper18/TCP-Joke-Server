@@ -23,8 +23,11 @@
 
   Different parts of the joke are stored in 2D arrays, which can be indexed using an increment every time the loop passes.
 
-  Server writes to the client, and the client responds with the correct response. Server will continue to send the same thing if a response is not 
-  recognised/sensible, for example - 
+  The server takes the different parts of the jokes, and writes it to the client, and waits for a response before sending the next part.
+  
+  Each time a joke has been completed, the server will ask the client if they want another one, if the client responds with 'yes' another will be sent, otherwise progam is ended.
+  
+  The server will only respond upon an accepted response -
   
   <img width="542" alt="Screenshot 2023-01-28 at 16 35 36" src="https://user-images.githubusercontent.com/68609221/215279257-2aae1b2f-26fe-488f-8531-    
                                                                3018c5d215ea.png">
