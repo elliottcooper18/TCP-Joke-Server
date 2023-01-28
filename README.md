@@ -4,18 +4,18 @@
 
 ## Compiling
 
-  Compile with - 'gcc -pedantic-errors -Wall -ansi -o server server.c'
-  Run with - './server <port number>'
+  Compile with - gcc -pedantic-errors -Wall -ansi -o server server.c
+  Run with - ./server <port number>
 
   Or in one line -
-  'gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>'
+  gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>
 
   -pedantic-errors -> Shows all strict warnings
   -Wall -> Shows all warnings 
   -ansi -> ansi C/ C99 language standard
 
   To connect to the server on another machine/different terminal -
-  'nc -C localhost <port number>'
+  nc -C localhost <port number>
 
 ## How does it work?
 
