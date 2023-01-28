@@ -18,7 +18,7 @@
   `-ansi` -> ansi C/ C99 language standard
 
   To connect to the server on another machine/different terminal -
-  `nc -C localhost <port number>`
+  `nc -C <ip address of server> <port number>`
 
 ## How does it work?
 
