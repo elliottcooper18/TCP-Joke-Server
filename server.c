@@ -11,10 +11,16 @@
 
 #define kBufSize 512
 
+typedef struct USER{
+    char *name;
+    int age;
+}USER;
 
 void handle_connection(int);
 int readLineFromNetwork(int sd, char *buf, int size);
 void write_to_client(int sd, char *buf);
+void get_user(USER*, int);
+int readLineFromNetwork(int sd, char *buf, int size);
 
 
 int main(int argc, char **argv){
@@ -81,53 +87,126 @@ int main(int argc, char **argv){
 
 void handle_connection(int client_socket){
 
-    char buffer[512];
-    char *knock = "knock Knock\n";
-    char first_part[][15] = {"Goat\n", "You\n"}, second_part[][50] = {"Goat to the door and find out!\n","Yoo-hoo! Anynody home?\n"};
-    
-
-    int length_check, inc = 0;
+    char buffer[512], check_buffer[512], *knock = "knock Knock\n", 
+    first_part[][15] = {"Goat", "You"}, 
+    second_part[][50] = {"Goat to the door and find out!\n","Yoo-hoo! Anynody home?\n"};
+    USER *new_user;
+    int incr = 0;
 
     write_to_client(client_socket, "Welcome to the server\n");
 
+    // get user details
+    new_user = (USER*)malloc(sizeof(USER));
+    get_user(new_user, client_socket);
+
+    sprintf(buffer, "Hello %s!\n", new_user->name);
+    write_to_client(client_socket, buffer);
+    //
+    
     do{
-  
+        // knock knock
         do{
-            write_to_client(client_socket, knock); //knock knock
-            bzero(buffer, strlen(buffer));
-            read(client_socket, buffer, 512);
-        }while (!(strcmp(buffer, "who's there\n") == 0));
+            write_to_client(client_socket, knock);
+            readLineFromNetwork(client_socket, buffer, kBufSize);
+        } while (!(strcmp(buffer, "who's there?") == 0) && !(strcmp(buffer, "whos there?") == 0));
+          
+        // first part
+        do{
+            write_to_client(client_socket, first_part[incr]);
+            write_to_client(client_socket, "\n");
+            readLineFromNetwork(client_socket, buffer, kBufSize);
+            sprintf(check_buffer, "%s who?", first_part[incr]);
+            
+        } while (!(strcmp(buffer, check_buffer) == 0));
 
-       
-        write_to_client(client_socket, first_part[inc]); // first part
+        // second part
+        write_to_client(client_socket, second_part[incr]);
 
-        bzero(buffer, strlen(buffer));
-        read(client_socket, buffer, 512);
+        if (incr < 1){
+            write_to_client(client_socket, "Would you like another (yes/amything else)");
+            readLineFromNetwork(client_socket, buffer, kBufSize);
+        }
 
-        write_to_client(client_socket, second_part[inc]); // second part
-
-        write_to_client(client_socket, "Would you like another joke? (yes for another)"); // second part
-
-        bzero(buffer, strlen(buffer));
-        read(client_socket, buffer, 512);
+        else{
+            write_to_client(client_socket, "That is all the jokes for now!\n");
+        }
         
+    } while ((strcmp(buffer, "yes") == 0) && (++incr < 2));
 
+    sprintf(buffer, "Thank you %s, hope you enjoyed the jokes :)\n", new_user->name);
+    write_to_client(client_socket, buffer);
 
+    free(new_user->name);
+    free(new_user);
 
-    }
-    
-    while((strcmp(buffer, "yes\n") == 0) && (inc++ < 2));
-
-    write_to_client(client_socket, "Goodbye :)");
     
 }
 
 
 
-void write_to_client(int sd, char *buffer){
+void write_to_client(int sd, char *string){
 
-    
-    write(sd, buffer, strlen(buffer));
+    write(sd, string, strlen(string));
 
 }
 
+void get_user(USER *new_user, int client_socket){
+
+    char buffer[kBufSize];
+
+    write_to_client(client_socket, "Please enter your name: ");
+    readLineFromNetwork(client_socket, buffer, kBufSize);
+    new_user->name = (char*)malloc(sizeof(char) * strlen(buffer));
+    strcpy(new_user->name, buffer);
+
+    write_to_client(client_socket, "Please enter your age: ");
+    readLineFromNetwork(client_socket, buffer, kBufSize);
+    new_user->age = atoi(buffer);
+    
+}
+
+int readLineFromNetwork(int sd, char *buf, int size)
+{	
+	/* create a buffer to read into the current buffer */
+	char lineBuffer[kBufSize];
+	int n;
+	int i, cline = 0, j = 0;
+
+	/* raead data from network */
+	/* read data into buffer */
+
+	/* read returns how many bytes it has returned from the network */
+
+	/* need to check we have all the data from the server */
+
+	do
+	{
+	n = read(sd, lineBuffer, kBufSize);
+
+	for (i = 0; i < n; i++)
+	{	
+		/* copies data into the buffer passed in */
+		buf[j] = lineBuffer[i];
+
+		/* check if youve come to the end of a line */
+		if (buf[j] == 10)
+		{
+			buf[j] = '\0';
+			/* set complete line True and exit*/
+			cline = 1;
+			break;
+		}
+
+		j++;
+	}
+	}
+
+	/* while not complete line, if not keep reading*/
+	/* check data has actually been returned */
+	while(cline == 0 && n > 0);
+
+	return n;
+
+
+
+}
