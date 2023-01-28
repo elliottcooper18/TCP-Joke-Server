@@ -22,12 +22,8 @@ void write_to_client(int sd, char *buf);
 void get_user(USER*, int);
 int readLineFromNetwork(int sd, char *buf, int size);
 
-
 int main(int argc, char **argv){
-
-    // how to implment a server - create a socket, bind it to port and ip, listen, accept, close connection, keep going
-    // will just implement serial connections
-
+    
     struct sockaddr_in server_addr, client_addr;
     int server_socket, server_port, client_socket;
     unsigned int client_length;
@@ -117,7 +113,6 @@ void handle_connection(int client_socket){
             write_to_client(client_socket, "\n");
             readLineFromNetwork(client_socket, buffer, kBufSize);
             sprintf(check_buffer, "%s who?", first_part[incr]);
-            
         } while (!(strcmp(buffer, check_buffer) == 0));
         //
 
