@@ -29,9 +29,8 @@
   
   The server will only respond upon an accepted response -
   
-  <img width="542" alt="Screenshot 2023-01-28 at 16 35 36" src="https://user-images.githubusercontent.com/68609221/215279257-2aae1b2f-26fe-488f-8531-    
-                                                               3018c5d215ea.png">
-
+  ![TCP server in action](screenshot.png)
+  
 ## Interesting points
 
   Dynamic memory allocation is used for the structure, and the name inside the structure. I decided to use this, as for the name, nobody knows how long a name will be, by using this, memory can be allocated from the heap, for whatever length of name the user decides to input (within reason)
