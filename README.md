@@ -5,6 +5,7 @@
 ## Compiling
 
   Compile with - `gcc -pedantic-errors -Wall -ansi -o server server.c`
+  
   Run with - `./server <port number>`
 
   Or in one line -
