@@ -26,7 +26,7 @@ Different parts of the joke are stored in 2D arrays, which can be indexed using 
 
 The server takes the different parts of the jokes, and writes it to the client, and waits for a response before sending the next part.
   
-Each time a joke has been completed, the server will ask the client if they want another one, if the client responds with 'yes' another will be sent, otherwise progam is terminated.
+Each time a joke has been completed, the server will ask the client if they want another one. If the client responds with 'yes' another will be sent, otherwise progam is terminated.
   
 The server will only respond upon an accepted response -
   
@@ -34,7 +34,7 @@ The server will only respond upon an accepted response -
   
 ## Interesting points
 
-Dynamic memory allocation is used for the structure, and the name inside the structure. I decided to use this, as for the name, nobody knows how long a name will be, by using this, memory can be allocated from the heap, for whatever length of name the user decides to input (within reason)
+Dynamic memory allocation is used for the structure, and the name inside the structure. I decided to use this, as for the name, nobody knows how long a name will be. By using this, memory can be allocated from the heap, for whatever length of name the user decides to input (within reason)
 
 The function `read_line_from_network()` is used to continually read from the network until all characters have been read. This is because only a specific number of bytes can be read at one time, and by using this function that I have written, it allows for all the data to be captured by the buffer.
   
