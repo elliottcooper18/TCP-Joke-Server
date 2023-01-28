@@ -26,7 +26,7 @@
 
   The server takes the different parts of the jokes, and writes it to the client, and waits for a response before sending the next part.
   
-  Each time a joke has been completed, the server will ask the client if they want another one, if the client responds with 'yes' another will be sent, otherwise progam is ended.
+  Each time a joke has been completed, the server will ask the client if they want another one, if the client responds with 'yes' another will be sent, otherwise progam is terminated.
   
   The server will only respond upon an accepted response -
   
