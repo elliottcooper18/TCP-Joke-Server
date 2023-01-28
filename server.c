@@ -107,7 +107,8 @@ void handle_connection(int client_socket){
         do{
             write_to_client(client_socket, knock);
             readLineFromNetwork(client_socket, buffer, kBufSize);
-        } while (!(strcmp(buffer, "who's there?") == 0) && !(strcmp(buffer, "whos there?") == 0));
+        } while (!(strcmp(buffer, "who's there?") == 0) && !(strcmp(buffer, "whos there?") == 0) && 
+        !(strcmp(buffer, "whos there") == 0) && !(strcmp(buffer, "Whos there?") == 0) && !(strcmp(buffer, "Who's there?") == 0));
         //
 
         // Send the first part of the joke, continue sending until satisfactory response sent
