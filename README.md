@@ -11,7 +11,9 @@
   `gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>`
 
   -pedantic-errors -> Shows all strict warnings
+  
   -Wall -> Shows all warnings 
+  
   -ansi -> ansi C/ C99 language standard
 
   To connect to the server on another machine/different terminal -
