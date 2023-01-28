@@ -1,8 +1,8 @@
-#TCP Knock Knock server
+# TCP Knock Knock server
 
   A TCP server written in C, which uses the knock knock protocol. Demonstrates the Client-Server paradigm, by which the server sends out the joke, and the client can respond appropriately.
 
-##Compiling
+## Compiling
 
   Compile with - gcc -pedantic-errors -Wall -ansi -o server server.c
   Run with - ./server <port number>
@@ -17,7 +17,7 @@
   To connect to the server on another machine/different terminal -
   nc -C localhost <port number>
 
-##How does it work?
+## How does it work?
 
   Store different parts of the joke in 2D arrays, incrementers used to access the indexes.
 
