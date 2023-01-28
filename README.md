@@ -10,18 +10,18 @@
   Or in one line -
   `gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>`
 
-  -pedantic-errors -> Shows all strict warnings
+  `-pedantic-errors` -> Shows all strict warnings
   
-  -Wall -> Shows all warnings 
+  `-Wall` -> Shows all warnings 
   
-  -ansi -> ansi C/ C99 language standard
+  `-ansi` -> ansi C/ C99 language standard
 
   To connect to the server on another machine/different terminal -
   `nc -C localhost <port number>`
 
 ## How does it work?
 
-  Store different parts of the joke in 2D arrays, incrementers used to access the indexes.
+  Different parts of the joke are stored in 2D arrays, which can be indexed using an increment every time the loop passes.
 
   Server writes to the client, and the client responds with the correct response. Server will continue to send the same thing if a response is not 
   recognised/sensible, for example - 
