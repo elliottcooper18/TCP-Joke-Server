@@ -29,7 +29,7 @@
   
   The server will only respond upon an accepted response -
   
-  ![TCP server in action](screenshot.png)
+  ![TCP server in action](Screenshot 2023-01-28 at 16.35.36.png)
   
 ## Interesting points
 
