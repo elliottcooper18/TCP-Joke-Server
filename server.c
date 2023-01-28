@@ -40,37 +40,36 @@ int main(int argc, char **argv){
 
     server_port = atoi(argv[1]); // get the server port from the command line argument
 
-    // check for range of the port
+    // Check for range of the port
     if (!(server_port >= 1024 && server_port <= 65536)){
         fprintf(stderr, "{ERROR} Server port out of range\n");
         exit(1);
     }
 
-    // create the socket type internet, stream of data, and tcp protocol
+    // Create the socket type internet, stream of data, and tcp protocol
     if ((server_socket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1){
         
         fprintf(stderr, "{ERROR} Cannot create the socket\n");
         exit(1);
     } 
 
-    // create the server address
+    // Create the server address
     memset(&server_addr, 0, sizeof(server_addr)); // set all data to 0, as some will not be used
     server_addr.sin_family = AF_INET; // set type of connection to be internet
     server_addr.sin_addr.s_addr = INADDR_ANY; // set any ip address to be listening to connection   
     server_addr.sin_port = htons(server_port); // convert to big endian number which is network standard
 
-    //bind the socket to the port and the ip address
-
+    // Bind the socket to the port and the ip address
     if (bind(server_socket, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1){
 
         fprintf(stderr, "{ERROR} Socket could not be binded\n");
         exit(1);
     }
 
-    // listen to incomming connections
-    listen(server_socket, 10); //listen on the server socket, and allow 10 machines to queue
+    // Listen to incomming connections on server socket
+    listen(server_socket, 10);
 
-    // accept the connections and handle
+    // Accept connection and handle
     while(1){
         
         client_length = sizeof(client_addr);
@@ -95,22 +94,23 @@ void handle_connection(int client_socket){
 
     write_to_client(client_socket, "Welcome to the server\n");
 
-    // get user details
-    new_user = (USER*)malloc(sizeof(USER));
-    get_user(new_user, client_socket);
+    // Get user details
+    new_user = (USER*)malloc(sizeof(USER)); // Allocate memory for the structure
+    get_user(new_user, client_socket); // Pass the structure by reference, and get user details
 
     sprintf(buffer, "Hello %s!\n", new_user->name);
     write_to_client(client_socket, buffer);
     //
     
     do{
-        // knock knock
+        // Send knock knock part to the user, continue sending until satisfactory response is sent
         do{
             write_to_client(client_socket, knock);
             readLineFromNetwork(client_socket, buffer, kBufSize);
         } while (!(strcmp(buffer, "who's there?") == 0) && !(strcmp(buffer, "whos there?") == 0));
-          
-        // first part
+        //
+
+        // Send the first part of the joke, continue sending until satisfactory response sent
         do{
             write_to_client(client_socket, first_part[incr]);
             write_to_client(client_socket, "\n");
@@ -118,10 +118,12 @@ void handle_connection(int client_socket){
             sprintf(check_buffer, "%s who?", first_part[incr]);
             
         } while (!(strcmp(buffer, check_buffer) == 0));
+        //
 
-        // second part
+        // Send the final part once, as no response is needed
         write_to_client(client_socket, second_part[incr]);
 
+        // Ask user if they want another joke, only if all the jokes have not been used
         if (incr < 1){
             write_to_client(client_socket, "Would you like another (yes/amything else)");
             readLineFromNetwork(client_socket, buffer, kBufSize);
@@ -130,19 +132,18 @@ void handle_connection(int client_socket){
         else{
             write_to_client(client_socket, "That is all the jokes for now!\n");
         }
+        //
         
     } while ((strcmp(buffer, "yes") == 0) && (++incr < 2));
 
+    // Sign out
     sprintf(buffer, "Thank you %s, hope you enjoyed the jokes :)\n", new_user->name);
     write_to_client(client_socket, buffer);
 
     free(new_user->name);
     free(new_user);
-
-    
+    //
 }
-
-
 
 void write_to_client(int sd, char *string){
 
@@ -206,7 +207,5 @@ int readLineFromNetwork(int sd, char *buf, int size)
 	while(cline == 0 && n > 0);
 
 	return n;
-
-
 
 }
