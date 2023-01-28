@@ -4,18 +4,18 @@
 
 ## Compiling
 
-  Compile with - gcc -pedantic-errors -Wall -ansi -o server server.c
-  Run with - ./server <port number>
+  Compile with - 'gcc -pedantic-errors -Wall -ansi -o server server.c'
+  Run with - './server <port number>'
 
   Or in one line -
-  gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>
+  'gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>'
 
   -pedantic-errors -> Shows all strict warnings
   -Wall -> Shows all warnings 
   -ansi -> ansi C/ C99 language standard
 
   To connect to the server on another machine/different terminal -
-  nc -C localhost <port number>
+  'nc -C localhost <port number>'
 
 ## How does it work?
 
@@ -27,7 +27,7 @@
   <img width="542" alt="Screenshot 2023-01-28 at 16 35 36" src="https://user-images.githubusercontent.com/68609221/215279257-2aae1b2f-26fe-488f-8531-    
                                                                3018c5d215ea.png">
 
- ## Interesting points
+## Interesting points
   
     A structure is used to store some information about the user, name and age. If I was to expand on this in the future, age could be evaluated, and some more adult jokes could be used, based on the age.
 
