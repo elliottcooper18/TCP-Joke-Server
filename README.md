@@ -4,18 +4,18 @@
 
 ## Compiling
 
-  Compile with - gcc -pedantic-errors -Wall -ansi -o server server.c
-  Run with - ./server <port number>
+  Compile with - `gcc -pedantic-errors -Wall -ansi -o server server.c`
+  Run with - `./server <port number>`
 
   Or in one line -
-  gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>
+  `gcc -pedantic-errors -Wall -ansi -o server server.c && ./server <port number>`
 
   -pedantic-errors -> Shows all strict warnings
   -Wall -> Shows all warnings 
   -ansi -> ansi C/ C99 language standard
 
   To connect to the server on another machine/different terminal -
-  nc -C localhost <port number>
+  `nc -C localhost <port number>`
 
 ## How does it work?
 
@@ -28,9 +28,9 @@
                                                                3018c5d215ea.png">
 
 ## Interesting points
-  
-    A structure is used to store some information about the user, name and age. If I was to expand on this in the future, age could be evaluated, and some more adult jokes could be used, based on the age.
 
   Dynamic memory allocation is used for the structure, and the name inside the structure. I decided to use this, as for the name, nobody knows how long a name will be, by using this, memory can be allocated from the heap, for whatever length of name the user decides to input (within reason)
 
-  The function read_line_from_network() is used to continually read from the network until all characters have been read. This is because only a specific number of bytes can be read at one time, and by using this function that I have written, it allows for all the data to be captured by the buffer.
+  The function `read_line_from_network()` is used to continually read from the network until all characters have been read. This is because only a specific number of bytes can be read at one time, and by using this function that I have written, it allows for all the data to be captured by the buffer.
+  
+   A structure is used to store some information about the user, name and age. If I was to expand on this in the future, age could be evaluated, and some more adult jokes could be used, based on the age.
