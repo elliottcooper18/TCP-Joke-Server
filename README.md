@@ -28,6 +28,7 @@
                                                                3018c5d215ea.png">
   
   ## Interesting points
+  
     A structure is used to store some information about the user, name and age. If I was to expand on this in the future, age could be evaluated, and some more adult jokes could be used, based on the age.
 
   Dynamic memory allocation is used for the structure, and the name inside the structure. I decided to use this, as for the name, nobody knows how long a name will be, by using this, memory can be allocated from the heap, for whatever length of name the user decides to input (within reason)
