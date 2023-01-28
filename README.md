@@ -37,4 +37,4 @@
 
   The function `read_line_from_network()` is used to continually read from the network until all characters have been read. This is because only a specific number of bytes can be read at one time, and by using this function that I have written, it allows for all the data to be captured by the buffer.
   
-   A structure is used to store some information about the user, name and age. If I was to expand on this in the future, age could be evaluated, and some more adult jokes could be used, based on the age.
+   A structure is used to store some information about the user, name and age. If I was to expand on this in the future, age could be evaluated, and some adult jokes could be used, based on the age.
